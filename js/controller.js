@@ -2,7 +2,6 @@
 	function noteController($scope, localStorageService) {
 		var vm = this;
 		vm.notes = localStorageService.get('notes') || [];
-		vm.isedit = false;
 
 
 		//*********************************************
@@ -34,11 +33,6 @@
  
 		var updateNoteContent = function(event, note) {
 			note.note = event.target.innerText;
-			// try {
-			// 	localStorageService.set('notes', vm.notes);
-			// } catch (e) {
-			// 	alert("Local storage size exceeded from 5MB.");
-			// }
 		}
 
 		vm.addNote = addNote;
