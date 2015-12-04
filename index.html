@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Notes</title>
+	<link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<link href="./style.css" rel="stylesheet">
+</head>
+<body>
+	<div ng-app="noteApp">
+		<div ng-controller="noteController as vm">			
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="#">Notes</a>
+			    </div>
+			  </div>
+			</nav>
+
+			<div class="container">
+				<div>
+					<input id="note" size="75" ng-model="vm.newNoteText" />
+					<button class="btn btn-primary active" id="add_note" ng-click="vm.addNote()">
+						<span class="glyphicon glyphicon-plus"></span>
+						Add Note</button>
+				</div>
+				
+				
+				<div>
+					<div id="notes_{{$index}}" ng-repeat="note in vm.notes" class="sticky" theme='{{note.noteTheme}}'>
+						<div class="note-header">
+							<div class="note-header-top">
+								<button type="button" class="close" ng-click="vm.deleteNote($index)">&times;</button>
+							</div>
+							<div class="note-header-bottom">
+								<div class="note-theme">
+									<div class="blue" theme="blue" index={{$index}} change-note-theme></div>
+									<div class="red" theme="red" index={{$index}} change-note-theme></div>
+									<div class="gray" theme="gray" index={{$index}} change-note-theme></div>
+									<div class="yellow" theme="yellow" index={{$index}} change-note-theme></div>
+								</div>
+							</div>
+						</div>
+						<div class="note-body">
+							 <p class="note-content" contentEditable = "true" ondblclick="$(this).focus();" ng-bind="note.note" ng-blur="vm.updateNoteContent($event, note)">{</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	 <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script> 
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+	<script src="./app.js"></script>
+	<script src="./controller.js"></script>
+	<script src="./js/directives.js"></script>
+</body>
+</html>
